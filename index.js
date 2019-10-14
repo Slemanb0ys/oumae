@@ -78,4 +78,4 @@ client.on('ready', () => {
   }
   
 
-client.login('NjMzMTU5ODQ1NTU3NTY3NDk4.XaTHfw.9mfoEF68jrqjN3oIYbH6xlPTF64')
+client.login('owo')
