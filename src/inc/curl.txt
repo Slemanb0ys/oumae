@@ -1,0 +1,53 @@
+<?php
+function wordFilter($text)
+{
+    $ambilkata = $text;
+    $ambilkata = str_replace('', '', $ambilkata);
+   
+    return $ambilkata;
+}
+$form = '
+<form action="index.php" method="GET">
+<input type="hidden" style="width:30%;" name="n0"><br>
+
+</center>
+</form>';
+
+print $form;
+
+if(isset($_GET['n0'])){
+    $n0 = $_GET['n0'];
+    $bangsat = 'https://www.animesonglyrics.com/';
+  $kontol = $bangsat . $n0; 
+  $curl = curl_init($kontol); 
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE); 
+$page = curl_exec($curl); 
+if(curl_errno($curl)) // check for execution errors
+{
+	echo ' error: ' . curl_error($curl);
+	exit;
+}
+ 
+curl_close($curl);
+
+$regex = '/<div id="txtlnk1">(.*?)<div id="lfcredits">/s';
+if ( preg_match($regex, $page, $list) )
+	
+    echo wordFilter($list[0]); 
+else 
+    print "Not found"; 
+}
+
+function sed($text)
+{
+    $sed = $text;
+    $sed = str_replace('-', ' ', $sed);
+    $sed = str_replace('/', ' - ', $sed);
+    return $sed;
+}
+
+$judul = sed(strtoupper($_GET['n0']));
+
+?>
+<title><?php echo $judul; ?></title>
+?>
